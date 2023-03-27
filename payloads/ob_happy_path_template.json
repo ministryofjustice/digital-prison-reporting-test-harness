@@ -1,0 +1,4 @@
+{
+    "data": "{\"offender_book_id\":1332,\"booking_begin_date\":\"2009-04-01\",\"booking_no\":\"1646254\",\"offender_id\":1333,\"agy_loc_id\":\"1\",\"living_unit_id\":3,\"in_out_status\":\"IN\",\"active_flag\":\"TRUE\",\"booking_status\":\"BOOKING\",\"youth_adult_code\":\"2\",\"finger_printed_staff_id\":1,\"search_staff_id\":2,\"photo_taking_staff_id\":6,\"assigned_staff_id\":10,\"create_agy_loc_id\":\"1\",\"booking_type\":\"1\",\"booking_created_date\":\"2009-04-01\",\"create_datetime\":\"2022-09-01T18:21:36.915241Z\",\"create_user_id\":\"1913\",\"modify_datetime\":\"2022-09-01T18:21:36.915241Z\",\"audit_timestamp\":\"2022-09-01T18:21:36.915241Z\",\"booking_seq\":1332,\"admission_reason\":\"naughty\"}",
+    "metadata": "{\"timestamp\":\"2023-03-17T07:28:30.110043Z\",\"record-type\":\"data\",\"operation\":\"load\",\"partition-key-type\":\"primary-key\",\"schema-name\":\"public\",\"table-name\":\"offender_bookings\"}"
+}
