@@ -1,5 +1,4 @@
 import sys,os
-# sys.path.append(r"/Users/hari.shanmugam/ministryofjustice/dpr_test_harness")
 sys.path.append(os.pardir)
 from utils.kinesis import KinesisStream
 

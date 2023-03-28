@@ -1,10 +1,10 @@
 import json
-import base64
+import base64,sys,os
+sys.path.append(os.pardir)
 from utils.config import getConfig
 from utils.kinesis import KinesisStream
-import sys
-import os
-sys.path.append(os.pardir)
+
+
 
 # GIVEN: ARRANGE
 
