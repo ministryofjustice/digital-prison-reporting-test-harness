@@ -1,11 +1,6 @@
 import json, uuid, boto3, base64
 from boto3 import Session
 
-
-# json="{ \"data\": {}, \"metadata\": { \"timestamp\":  \"$iso_timestamp\", \"record-type\":  \"data\", \"operation\":  \"insert\", \"partition-key-type\": \"primary-key\", \"partition-key-value\":  \"OMS_OWNER.AGENCY_INTERNAL_LOCATIONS.134401\", \"schema-name\":  \"OMS_OWNER\", \"table-name\": \"AGENCY_INTERNAL_LOCATIONS\" }}"
-
-# stream="dpr-kinesis-partitioned-ingestor-spike"
-
 class KinesisStream :
     
     def __init__(self, stream):
@@ -16,6 +11,9 @@ class KinesisStream :
         """ Connect to Kinesis Streams """
         session = Session(profile_name=profileName)
         return session.client('kinesis')
+    
+    def stream_name(self):
+        return self.stream
 
     def send_stream(self, data,profileName,partition_key=None):
         """
