@@ -13,7 +13,8 @@ stream = KinesisStream(getConfig("kinesis", "stream"))
 
 # STUB TABLE DATA
 
-tableName = "OFFENDER_BOOKINGS"
+tableName = "OFFENDERS"
+# tableName="AGENCY_INTERNAL_LOCATIONS"
 
 payloadRepo_happy_path = os.pardir+'/payloads/happy_scenarios'
 payloadRepo_error_scenarios = os.pardir+'payloads/error_scenarios'
