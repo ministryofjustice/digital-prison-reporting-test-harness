@@ -1,6 +1,6 @@
 import sys,os
 sys.path.append(os.pardir)
-from utils.kinesis import KinesisStream
+from utils.Kinesis import KinesisStream
 
 # stream= KinesisStream("dpr-kinesis-partitioned-ingestor-spike")
 stream= KinesisStream("dpr-297-datastream")

@@ -1,0 +1,37 @@
+{
+	"data":	{
+		"INTERNAL_LOCATION_ID":	8994,
+		"INTERNAL_LOCATION_CODE":	"TAP",
+		"AGY_LOC_ID":	"UNKNWN",
+		"INTERNAL_LOCATION_TYPE":	"AREA",
+		"DESCRIPTION":	"UNKNWN-TAP",
+		"CAPACITY":	25,
+		"CREATE_USER_ID":	"OMS_OWNER",
+		"ACTIVE_FLAG":	"Y",
+		"LIST_SEQ":	2,
+		"CREATE_DATETIME":	"2007-07-24T20:05:41.549562000Z",
+		"MODIFY_DATETIME":	"2017-05-09T21:28:19.943490000Z",
+		"MODIFY_USER_ID":	"OMS_OWNER",
+		"CNA_NO":	0,
+		"CERTIFIED_FLAG":	"N",
+		"COMMENT_TEXT":	"XbZBsOglAXbZBsOglA",
+		"UNIT_TYPE":	"OU",
+		"OPERATION_CAPACITY":	25,
+		"NO_OF_OCCUPANT":	0,
+		"TRACKING_FLAG":	"N",
+		"AUDIT_TIMESTAMP":	"2017-05-09T21:28:19.943516000Z",
+		"AUDIT_USER_ID":	"OMS_OWNER",
+		"AUDIT_MODULE_NAME":	"sqlplus@DAPDL0001 (TNS V1-V3)",
+		"AUDIT_CLIENT_USER_ID":	"oracle",
+		"AUDIT_CLIENT_WORKSTATION_NAME":	"pts/6"
+	},
+	"metadata":	{
+		"timestamp":	"2023-03-20T17:41:23.098719Z",
+		"record-type":	"data",
+		"operation":	"load",
+		"partition-key-type":	"primary-key",
+		"partition-key-value":	"OMS_OWNER.AGENCY_INTERNAL_LOCATIONS.8994",
+		"schema-name":	"OMS_OWNER",
+		"table-name":	"AGENCY_INTERNAL_LOCATIONS"
+	}
+}
