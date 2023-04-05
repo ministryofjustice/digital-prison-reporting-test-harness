@@ -3,3 +3,6 @@ utils/__pycache__
 JIRA_Notes.txt
 playground
 /tests/__pycache__
+/tests/.pytest_cache
+/tests/results
+/tests/utils_tests

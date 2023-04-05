@@ -45,7 +45,7 @@ def pushMessages():
                 payload = json.dumps(json.load(f))
             stream.send_stream(data=payload, profileName=profileName)
 
-for i in range(1,100):
+for i in range(1,5):
     pushMessages()
 
 scenario_count={}

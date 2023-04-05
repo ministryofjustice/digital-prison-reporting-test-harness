@@ -18,10 +18,8 @@ class S3:
         # "s3://dpr-297-raw-zone/raw/{}".format(sourceName)
         resourcePath = "s3://{}/{}/{}/".format(
             bucketName.name, resourceZone, sourceName)
-        print(resourcePath)
         parsed_uri = urlparse(resourcePath)
         resourcePath = parsed_uri.path.lstrip('/')
-        print("RESOURCE PATH", resourcePath)
         objects = bucketName.objects.filter(Prefix=resourcePath)
         objects = bucketName.objects.filter(Prefix=resourcePath)
         for obj in objects:
@@ -34,13 +32,14 @@ class S3:
 
         bucketName = self.client().Bucket(self.bucketName)
         # "s3://dpr-297-raw-zone/raw/{}".format(sourceName)
+        #  s3://dpr-320/structured/nomis/offenders/
+        #  s3://dpr-320/raw/nomis/offenders/
 
         resourcePath = "s3://{}/{}/{}/{}/".format(
             bucketName.name, resourceZone, sourceName, tableName)
-        print(resourcePath)
+
         parsed_uri = urlparse(resourcePath)
         resourcePath = parsed_uri.path.lstrip('/')
-        print("RESOURCE PATH", resourcePath)
         objects = bucketName.objects.filter(Prefix=resourcePath)
         for obj in objects:
             resourceList.append(obj.key)
