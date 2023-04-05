@@ -2,3 +2,4 @@ utils/__pycache__
 .vscode/
 JIRA_Notes.txt
 playground
+/tests/__pycache__

@@ -18,13 +18,13 @@ stream = Kinesis(getConfig("kinesis", "stream"))
 tableName="AGENCY_INTERNAL_LOCATIONS"
 # tableName="AGENCY_LOCATIONS"
 
-payloadRepo_happy_path = os.pardir+'/payloads/happy_scenarios'
-payloadRepo_error_scenarios = os.pardir+'payloads/error_scenarios'
+payloadRepo_happy_scenarios = os.pardir+'/payloads/happy_scenarios'
+payloadRepo_error_scenarios = os.pardir+'/payloads/error_scenarios'
 
 
-for filename in os.listdir(payloadRepo_happy_path):
+for filename in os.listdir(payloadRepo_happy_scenarios):
     if filename.startswith(tableName):
-        with open(os.path.join(payloadRepo_happy_path, filename), 'r') as f:
+        with open(os.path.join(payloadRepo_error_scenarios, filename), 'r') as f:
             payload = json.dumps(json.load(f))
             base64data = base64.b64encode(payload.encode())
 
@@ -32,7 +32,7 @@ print("\n"+"Data source {} : Table Name {} : Stream name {}".format("NOMIS", tab
 
 # WHEN:POST DATA TO KINESIS STREAM : ACT
 
-for i in range(1):
+for i in range(10):
     response = stream.send_stream(data=payload, profileName=profileName)
     print("Record ID -- {}  ShardId -- {}  SequenceNumber -- {}  HTTPStatusCode -- {}".format(i+1,
           response["ShardId"], response["SequenceNumber"], response["ResponseMetadata"]["HTTPStatusCode"]))
