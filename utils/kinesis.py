@@ -2,8 +2,6 @@ import uuid
 import base64
 import json,os
 from boto3 import Session
-
-
 class Kinesis:
 
     def __init__(self, stream):

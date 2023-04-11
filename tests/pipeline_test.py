@@ -1,7 +1,7 @@
 import sys
 import os
 sys.path.append(os.pardir)
-from utils.handles import get_payload
+from utils.Handles import get_payload
 from utils.Kinesis import Kinesis
 from utils.Config import getConfig
 from utils.S3 import S3
