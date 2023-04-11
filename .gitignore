@@ -6,3 +6,7 @@ playground
 /tests/.pytest_cache
 /tests/results
 /tests/utils_tests
+.DS_Store
+/tests/.DS_Store
+/tests/allure-results/
+/tests/allure-report/
