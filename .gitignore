@@ -10,3 +10,13 @@ playground
 /tests/.DS_Store
 /tests/allure-results/
 /tests/allure-report/
+.env
+.terraform/
+coverage/
+venv/
+env/
+.DS_STORE
+.vscode
+*.code-workspace
+*.sha256
+terraform.tfstate
