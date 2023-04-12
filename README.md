@@ -22,22 +22,31 @@ This project uses Python3 (Python 3.11.2 ).Key packages used are as below
 - [pytest](https://projectlombok.org/) - Test framework/tool
 - [allure-reporting](https://docs.qameta.io/allure/) - Flexible lightweight multi-language test report tool
 
+## Pre-requistes
+
+- Python installed (ver 3.11.2)
+- AWS profile exists (Update config in test_data.ini)
+- Install all python packages
+  ```
+    pip install -r requirements.txt 
+  ```
+
 ### Running the tests
 
 ```
-    Using the test runner  sh runner.sh
+       runner  sh runner.sh
 
 ```
 ### Integration Tests
 
 ```
-    TBD
+       TBD
 ```
 
 ### Acceptance Tests
 
 ```
-    TBD
+       TBD
 ```
 
 ## Contributing
