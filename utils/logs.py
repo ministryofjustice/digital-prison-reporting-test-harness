@@ -1,74 +1,45 @@
 from boto3 import Session
 import datetime
 
-class logs:
+class Logs:
+ 
 
-    def __init__(self, job,profileName):
-        self.job = job
-        # self.job_id=job_run_id
+    def __init__(self, jobName,profileName,filter_events="ERROR",tail=False):
+        self.job = jobName
         self.profileName=profileName
-
-    def _connected_client(self):
+        self.tail=tail
+        self.logGroupName="/aws-glue/jobs/error"
+        self.filter_events= filter_events
+        self.run_id=[]
         
-        """ Connect to logs"""
+    def _connected_clients(self):
+        self.resources={}
         session = Session(profile_name=self.profileName)
-        return session.client('logs')
-    
-    def stream_name(self):
-        return self.stream
-    
-    def get_logs(self):
-        
-        print(self.job)
-        
-        response= self._connected_client().start_query(logGroupName="/aws-glue/jobs/error",
-                                                     startTime=int((datetime.datetime.now()-datetime.timedelta(hours=1)).timestamp()),
-                                                     endTime=int(datetime.datetime.now().timestamp()),
-                                                     queryString='fields @timestamp, message | filter message like \'%s\' | sort @timestamp desc | limit 1' % self.job)
-        query_id=response['queryId']
-        response=None
-        while response== None or response['status'] == 'Running':
-            print("Query in progress...")
-            response=self._connected_client().get_query_results(queryId=query_id)
-        
-        job_run_id=None
-        
-        print(response)
-        
-        
-        for field in response['results'][0]:
-            if field['field']== "message":
-                log_message=field['value']
-                
-                if self.job in log_message:
-                    job_run_id= log_message.split(self.job)[-1].split(' ')[1]
-                    break
-                
-        if job_run_id is None:
-            print ("Unable to find latest job run")
-            exit        
-        
-        response= self._connected_client.filter_log_events(logGroupName="/aws-glue/jobs/error",
-                                                           filterPattern='[aws-glue] %s[%s]' % (self.job,job_run_id))
-        
-        for event in response['events']:
-            print(event['message']) 
-                           
-        
-        
-        # log_group_name="/aws-glue/jobs/error"
-        
-        # print("log group name {}",log_group_name)
-        # log_stream_name= f'{self.job_id}'
-        
-        # print("Log stream name {}".format(log_stream_name))
-        # logs= self._connected_client()
-        
-        
-        # response= logs.get_log_events(logGroupName=log_group_name,logStreamName=log_stream_name)
-        
-        # for event in response['events']:
+        self.resources={"glue":session.client('glue'),"logs":session.client('logs')}
+
+        print(self.resources)
+        return self.resources
+
+    def get_glue_logs(self):
+      
+      glue_response = self._connected_clients().get("glue").get_job_runs(
+      JobName=self.job,
+       MaxResults=100
+      )
+      
+           
+      for job_run in glue_response['JobRuns']:
+        self.run_id.append(job_run['Id'])
           
-        #      print(event['message'])
-    
-    
+      
+      log_response = self._connected_clients().get('logs').filter_log_events(
+        logGroupName=self.logGroupName,
+        logStreamNames=[self.run_id[0]],
+        filterPattern=self.filter_events)
+
+
+      for event in log_response['events']:
+         print(event['message'])    
+        
+
+        
