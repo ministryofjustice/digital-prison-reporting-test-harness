@@ -15,7 +15,7 @@ stream = Kinesis(getConfig("kinesis", "stream"))
 
 # STUB TABLE DATA
 
-tableNames = ["OFFENDERS", "OFFENDER_BOOKINGS",
+tableNames = ["OFFENDERS",
               "AGENCY_INTERNAL_LOCATIONS", "AGENCY_LOCATIONS"]
 
 
@@ -45,7 +45,7 @@ def pushMessages():
                 payload = json.dumps(json.load(f))
             stream.send_stream(data=payload, profileName=profileName)
 
-for i in range(1,5):
+for i in range(1,100):
     pushMessages()
 
 scenario_count={}
