@@ -1,0 +1,19 @@
+version: 2.1
+
+orbs:
+  reporting: ministryofjustice/hmpps-reporting@1.0.9
+
+workflows:
+  checkout-build-publish:
+    jobs:         
+      - reporting/test_harness:
+          test_command: "pytest --alluredir=allure-results"
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              ignore: /.*/
+          ref: << pipeline.git.branch >><< pipeline.git.tag >>  
+          context:
+            - hmpps-reporting-common
+            - hmpps-reporting-orb
