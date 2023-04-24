@@ -7,13 +7,12 @@ workflows:
   checkout-build-publish:
     jobs:         
       - reporting/test_harness:
-          test_command: "pytest --alluredir=allure-results"
+          command: "pytest --alluredir=allure-results"
           filters:
             branches:
               only: /.*/
             tags:
               ignore: /.*/
-          ref: << pipeline.git.branch >><< pipeline.git.tag >>  
           context:
             - hmpps-reporting-common
             - hmpps-reporting-orb
