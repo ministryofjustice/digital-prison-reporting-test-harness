@@ -1,6 +1,5 @@
 import sys
 import os
-sys.path.append(os.pardir)
 from utils.Handles import get_payload
 from utils.Kinesis import Kinesis
 from utils.Config import getConfig
