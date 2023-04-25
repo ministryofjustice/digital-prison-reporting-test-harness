@@ -22,3 +22,4 @@ env/
 *.code-workspace
 *.sha256
 terraform.tfstate
+hari-test
