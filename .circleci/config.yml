@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  reporting: ministryofjustice/hmpps-reporting@dev:687b2b9151b97194ea8adce0d4a496ca87fb270b
+  reporting: ministryofjustice/hmpps-reporting@1.0.9
 
 workflows:
   run-test-harness:
