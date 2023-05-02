@@ -1,10 +1,10 @@
 {
     "data": {
 
-                    "AGY_LOC_ID" : "LDM011",
-                    "DESCRIPTION" : "Tulse Hill",
+                    "AGY_LOC_ID" : "{{AGY_LOC_ID}}",
+                    "DESCRIPTION" : "{{DESCRIPTION}}",
                     "AGENCY_LOCATION_TYPE" : "COMM",
-                    "DISTRICT_CODE" : "62",
+                    "DISTRICT_CODE" : "{{DISTRICT_CODE}}",
                     "UPDATED_ALLOWED_FLAG" : "Y",
                     "ABBREVIATION" : null,
                     "DEACTIVATION_DATE" : "2020-02-05T00:00:00.000Z",
@@ -40,7 +40,7 @@
                     "MODIFY_DATETIME" : "2021-04-28T08:49:54.520Z",
                     "MODIFY_USER_ID" : "MWILLIS_ADM",
                     "AUDIT_TIMESTAMP" : "2021-04-28T08:49:54.520Z",
-                    "AUDIT_USER_ID" : "MWILLIS_ADM",
+                    "AUDIT_USER_ID" : "{{AUDIT_USER_ID}}",
                     "AUDIT_MODULE_NAME" : "OUMAGLOC",
                     "AUDIT_CLIENT_USER_ID" : "mwillis",
                     "AUDIT_CLIENT_IP_ADDRESS" : "10.102.1.72",
