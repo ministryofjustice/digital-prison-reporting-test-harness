@@ -2,7 +2,7 @@ import json,random
 from jinja2 import Environment, FileSystemLoader
 from faker import Faker
 
-def get_data(fileName):
+def get_data(fileName,scenario):
     
 
     faker=Faker(locale="en_GB")
@@ -35,12 +35,16 @@ def get_data(fileName):
     MIDDLE_NAME=faker.name().split(" ")[0]
 
 
-
 # Load the template file
-    templateLocation= "../payloads/happy_scenarios"
+    match scenario.lower().strip():
+        case "happy_path":
+            templateLocation= "../payloads/happy_scenarios"
+        case "unhappy_path":
+            templateLocation= "../payloads/error_scenarios"
+            
     env = Environment(loader=FileSystemLoader(templateLocation))
     template = env.get_template(fileName+".json")
-
+ 
 
 # Render the template with the variables
     AGENCY_LOCATIONS = template.render(AGY_LOC_ID=AGY_LOC_ID,DESCRIPTION=DESCRIPTION,DISTRICT_CODE=DISTRICT_CODE,AUDIT_USER_ID=AUDIT_USER_ID)
@@ -50,7 +54,7 @@ def get_data(fileName):
 
 # Convert the rendered template to a JSON payload
     payloadName=(fileName.split(".")[0])
-    print(payloadName)
+    # print(payloadName)
 
     match payloadName:
         case"AGENCY_LOCATIONS":
@@ -63,3 +67,7 @@ def get_data(fileName):
             json_payload = json.loads(OFFENDERS)      
     
     return json.dumps(json_payload).replace("'","\"")
+
+# data=get_data("OFFENDER_BOOKINGS","happy_path")
+
+# print(data)
