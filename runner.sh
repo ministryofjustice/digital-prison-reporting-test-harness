@@ -1,3 +1,4 @@
+export PYTHONPATH=${PWD}
 rm -rf allure_results/history
 cd tests && pytest --alluredir=allure-results load_job_test.py
 # cd tests && python3 -m pytest --alluredir=allure-results load_job_test.py
