@@ -1,13 +1,14 @@
 version: 2.1
 
 orbs:
-  reporting: ministryofjustice/hmpps-reporting@1.0.10
+  reporting: ministryofjustice/hmpps-reporting@1.0.21
 
 workflows:
   run-test-harness:
     jobs:         
-      - reporting/test_harness:
-          command: "pytest --alluredir=allure-results"
+      - reporting/execute_test_harness:
+          command: "pytest --alluredir=allure-result"
+          test_ready: true
           filters:
             branches:
               only: /.*/
