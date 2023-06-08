@@ -33,8 +33,9 @@ def test_raw_zone_source_exists():
   assert zone_repo_raw.doesSourceExist("nomis") == True
     
 def test_structured_zone_source_exists():
+  
   assert zone_repo_structured.doesSourceExist("nomis") == True  
-    
+   
 def test_curated_zone_source_exists():
   assert zone_repo_curated.doesSourceExist("nomis") == True
   
@@ -42,10 +43,11 @@ def test_raw_zone_table_exists():
   zone_repo_curated.doesTableExist("nomis",tableName)
     
 def test_structured_table_exists():
-  zone_repo_structured.doesTableExist("nomis",tableName,"structured")   
+  zone_repo_structured.doesTableExist("nomis",tableName)   
     
 def test_curated_table_exists():
-  zone_repo_curated.doesTableExist("nomis",tableName,"curated") 
+  zone_repo_curated.doesTableExist("nomis",tableName) 
   
 def test_curated_data_exists():
   assert len(athena_table.runQuery(query)) > 0
+  

@@ -15,9 +15,11 @@ class S3:
     def doesSourceExist(self, sourceName, resourceZone="raw"):
         resourceList = []
         bucketName = self.client().Bucket(self.bucketName)
-        # "s3://dpr-297-raw-zone/raw/{}".format(sourceName)
-        resourcePath = "s3://{}/{}/{}/".format(
-            bucketName.name, resourceZone, sourceName)
+        # s3://dpr-raw-zone-development/nomis/
+        
+        resourcePath = "s3://{}/{}/".format(bucketName.name, sourceName)
+        
+        print(resourcePath)
         parsed_uri = urlparse(resourcePath)
         resourcePath = parsed_uri.path.lstrip('/')
         objects = bucketName.objects.filter(Prefix=resourcePath)
@@ -27,16 +29,14 @@ class S3:
         isFolderPresent = [resourcePath in item for item in resourceList]
         return True if isFolderPresent else False
 
-    def doesTableExist(self, sourceName, tableName, resourceZone="raw"):
+    def doesTableExist(self, sourceName, tableName):
         resourceList = []
 
         bucketName = self.client().Bucket(self.bucketName)
-        # "s3://dpr-297-raw-zone/raw/{}".format(sourceName)
-        #  s3://dpr-320/structured/nomis/offenders/
-        #  s3://dpr-320/raw/nomis/offenders/
 
-        resourcePath = "s3://{}/{}/{}/{}/".format(
-            bucketName.name, resourceZone, sourceName, tableName)
+        #  s3://dpr-raw-zone-development/nomis/agency_locations/
+        resourcePath = "s3://{}/{}/{}/".format(
+            bucketName.name,sourceName,tableName)
 
         parsed_uri = urlparse(resourcePath)
         resourcePath = parsed_uri.path.lstrip('/')
@@ -47,7 +47,7 @@ class S3:
 
         return True if isFolderPresent else False
 
-    def getKeysFromTable(self, sourceName, tableName, resourceZone="raw"):
+    def getKeysFromTable(self, sourceName, tableName):
 
         keyList = []
         bucketName = self.client().Bucket(self.bucketName)
