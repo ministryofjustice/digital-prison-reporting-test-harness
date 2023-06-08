@@ -10,10 +10,14 @@ from utils.Athena import Athena
 
 profileName = getConfig("aws", "profile")
 stream = Kinesis(getConfig("kinesis", "stream"))
-bucketName= getConfig("s3","bucket")
+rawBucketName= getConfig("s3","raw_zone_bucket")
+structuredBucketName= getConfig("s3","structured_zone_bucket")
+curatedBucketName= getConfig("s3","curated_zone_bucket")
 tableName="offenders"
 payload=get_payload(tableName)
-zone_repo=s3handle=S3(profilename=profileName,bucketName=bucketName)
+zone_repo_raw=s3handle=S3(profilename=profileName,bucketName=rawBucketName)
+zone_repo_structured=s3handle=S3(profilename=profileName,bucketName=structuredBucketName)
+zone_repo_curated=s3handle=S3(profilename=profileName,bucketName=curatedBucketName)
 athena_table = Athena(profileName, 'dpr-320-test',
                         "dpr-304-test", "athena_test")
 query = 'SELECT count(*) FROM "{}"."{}"'.format(
@@ -25,22 +29,23 @@ def test_post_message_to_stream():
     assert response["ResponseMetadata"]["HTTPStatusCode"]  ==  200
     
 def test_raw_zone_source_exists():
-  assert zone_repo.doesSourceExist("nomis") == True
+  
+  assert zone_repo_raw.doesSourceExist("nomis") == True
     
 def test_structured_zone_source_exists():
-  assert zone_repo.doesSourceExist("nomis") == True  
+  assert zone_repo_structured.doesSourceExist("nomis") == True  
     
 def test_curated_zone_source_exists():
-  assert zone_repo.doesSourceExist("nomis") == True
+  assert zone_repo_curated.doesSourceExist("nomis") == True
   
 def test_raw_zone_table_exists():
-  zone_repo.doesTableExist("nomis",tableName)
+  zone_repo_curated.doesTableExist("nomis",tableName)
     
 def test_structured_table_exists():
-  zone_repo.doesTableExist("nomis",tableName,"structured")   
+  zone_repo_structured.doesTableExist("nomis",tableName,"structured")   
     
 def test_curated_table_exists():
-  zone_repo.doesTableExist("nomis",tableName,"curated") 
+  zone_repo_curated.doesTableExist("nomis",tableName,"curated") 
   
 def test_curated_data_exists():
   assert len(athena_table.runQuery(query)) > 0
