@@ -41,10 +41,10 @@ def pushMessages():
     payload=get_data(tableName,scenario)
     
     result=stream.send_stream(data=payload, profileName=profileName)
-    print(result)
+    print("Table_Name :: {} {}".format(tableName,result))
     messages.append("{}  ::  {}".format(scenario,tableName))
     
-for i in range(1,2):
+for i in range(1,3):
     pushMessages()
 
 scenario_count={}

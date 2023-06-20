@@ -4,9 +4,15 @@ from faker import Faker
 
 def get_data(fileName,scenario):
     
-
+    
     faker=Faker(locale="en_GB")
-
+    
+    OFFENDERS_BOOKING_DATA={}
+    OFFENDERS_DATA={}
+    AGENCY_LOCATIONS_DATA={}
+    AGENCY_INTERNAL_LOCATIONS_DATA={}
+    
+    
 # Define the variables to be used in the template
 
 
@@ -48,9 +54,20 @@ def get_data(fileName,scenario):
 
 # Render the template with the variables
     AGENCY_LOCATIONS = template.render(AGY_LOC_ID=AGY_LOC_ID,DESCRIPTION=DESCRIPTION,DISTRICT_CODE=DISTRICT_CODE,AUDIT_USER_ID=AUDIT_USER_ID)
+    
+    AGENCY_LOCATIONS_DATA[AGY_LOC_ID]="DECSRIPTION:{},DISTRICT_CODE:{},AUDIT_USER_ID:{}".format(DESCRIPTION,DISTRICT_CODE,AUDIT_USER_ID)
+    
     AGENCY_INTERNAL_LOCATIONS = template.render(INTERNAL_LOCATION_ID=INTERNAL_LOCATION_ID,DESCRIPTION=DESCRIPTION,AUDIT_CLIENT_USER_ID=AUDIT_CLIENT_USER_ID,AUDIT_USER_ID=AUDIT_USER_ID)
+    
+    AGENCY_INTERNAL_LOCATIONS_DATA[INTERNAL_LOCATION_ID]="DESCRIPTION:{},AUDIT_CLIENT_USER_ID:{},AUDIT_USER_ID:{}"
+    
     OFFENDER_BOOKINGS = template.render(BOOKING_NO=BOOKING_NO)
+    
+    OFFENDERS_BOOKING_DATA['BOOKING_NO']=""
+    
     OFFENDERS = template.render(LAST_NAME=LAST_NAME,FIRST_NAME=FIRST_NAME,MIDDLE_NAME=MIDDLE_NAME)
+    
+    OFFENDERS_DATA[LAST_NAME]="LAST_NAME:{},FIRST_NAME:{},MIDDLE_NAME:{}".format(LAST_NAME,FIRST_NAME,MIDDLE_NAME)
 
 # Convert the rendered template to a JSON payload
     payloadName=(fileName.split(".")[0])
