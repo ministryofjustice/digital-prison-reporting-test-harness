@@ -44,7 +44,7 @@ def pushMessages():
     print("Table_Name :: {} {}".format(tableName,result))
     messages.append("{}  ::  {}".format(scenario,tableName))
     
-for i in range(1,3):
+for i in range(1,2):
     pushMessages()
 
 scenario_count={}

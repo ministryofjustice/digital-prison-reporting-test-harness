@@ -1,6 +1,7 @@
 import json,random
 from jinja2 import Environment, FileSystemLoader
 from faker import Faker
+from datetime import datetime,timedelta
 
 def get_data(fileName,scenario):
     
@@ -15,6 +16,9 @@ def get_data(fileName,scenario):
     
 # Define the variables to be used in the template
 
+    metadata_timestamp_current= datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    random_seconds = random.randint(1,600)
+    metadata_timestamp_future=(datetime.now()+ timedelta(seconds=random_seconds)).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 
 # AGENCY_LOCATIONS TEST DATA
 
@@ -23,6 +27,7 @@ def get_data(fileName,scenario):
     DISTRICT_CODE=random.randint(1,1000)
     AUDIT_USER_ID=faker.name()
     AGY_LOC_ID="LD"+random.choice(LOC_ID)
+    
 
 # AGENCY_INTERNAL_LOCATIONS TEST DATA
 
@@ -53,21 +58,21 @@ def get_data(fileName,scenario):
  
 
 # Render the template with the variables
-    AGENCY_LOCATIONS = template.render(AGY_LOC_ID=AGY_LOC_ID,DESCRIPTION=DESCRIPTION,DISTRICT_CODE=DISTRICT_CODE,AUDIT_USER_ID=AUDIT_USER_ID)
+    AGENCY_LOCATIONS = template.render(AGY_LOC_ID=AGY_LOC_ID,DESCRIPTION=DESCRIPTION,DISTRICT_CODE=DISTRICT_CODE,AUDIT_USER_ID=AUDIT_USER_ID,timestamp=metadata_timestamp_current)
     
     AGENCY_LOCATIONS_DATA[AGY_LOC_ID]="DECSRIPTION:{},DISTRICT_CODE:{},AUDIT_USER_ID:{}".format(DESCRIPTION,DISTRICT_CODE,AUDIT_USER_ID)
     
-    AGENCY_INTERNAL_LOCATIONS = template.render(INTERNAL_LOCATION_ID=INTERNAL_LOCATION_ID,DESCRIPTION=DESCRIPTION,AUDIT_CLIENT_USER_ID=AUDIT_CLIENT_USER_ID,AUDIT_USER_ID=AUDIT_USER_ID)
+    AGENCY_INTERNAL_LOCATIONS = template.render(INTERNAL_LOCATION_ID=INTERNAL_LOCATION_ID,DESCRIPTION=DESCRIPTION,AUDIT_CLIENT_USER_ID=AUDIT_CLIENT_USER_ID,AUDIT_USER_ID=AUDIT_USER_ID,timestamp=metadata_timestamp_current)
     
     AGENCY_INTERNAL_LOCATIONS_DATA[INTERNAL_LOCATION_ID]="DESCRIPTION:{},AUDIT_CLIENT_USER_ID:{},AUDIT_USER_ID:{}"
     
-    OFFENDER_BOOKINGS = template.render(BOOKING_NO=BOOKING_NO)
+    OFFENDER_BOOKINGS = template.render(BOOKING_NO=BOOKING_NO,timestamp=metadata_timestamp_current)
     
-    OFFENDERS_BOOKING_DATA['BOOKING_NO']=""
+    OFFENDERS_BOOKING_DATA['BOOKING_NO']="timestamp:{}".format(metadata_timestamp_future)
     
-    OFFENDERS = template.render(LAST_NAME=LAST_NAME,FIRST_NAME=FIRST_NAME,MIDDLE_NAME=MIDDLE_NAME)
+    OFFENDERS = template.render(LAST_NAME=LAST_NAME,FIRST_NAME=FIRST_NAME,MIDDLE_NAME=MIDDLE_NAME,timestamp=metadata_timestamp_current)
     
-    OFFENDERS_DATA[LAST_NAME]="LAST_NAME:{},FIRST_NAME:{},MIDDLE_NAME:{}".format(LAST_NAME,FIRST_NAME,MIDDLE_NAME)
+    OFFENDERS_DATA[LAST_NAME]="LAST_NAME:{},FIRST_NAME:{},MIDDLE_NAME:{},timestamp:{}".format(LAST_NAME,FIRST_NAME,MIDDLE_NAME,metadata_timestamp_future)
 
 # Convert the rendered template to a JSON payload
     payloadName=(fileName.split(".")[0])

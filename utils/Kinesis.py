@@ -1,4 +1,4 @@
-import uuid
+import uuid,json
 import base64
 import json,os
 from boto3 import Session
@@ -17,8 +17,8 @@ class Kinesis:
     def send_stream(self, data, profileName, partition_key=None):
 
         if partition_key == None:
-            partition_key = str(uuid.uuid4())
-
+            # partition_key = str(uuid.uuid4())
+              partition_key=json.loads(data)['metadata']['partition-key-value'] 
         client = self._connected_client(profileName)
         response= client.put_record(
             StreamName=self.stream,
