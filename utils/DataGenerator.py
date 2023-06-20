@@ -22,11 +22,11 @@ def get_data(fileName,scenario):
 
 # AGENCY_LOCATIONS TEST DATA
 
-    LOC_ID=["011","012","013"]
     DESCRIPTION=faker.sentence()
     DISTRICT_CODE=random.randint(1,1000)
     AUDIT_USER_ID=faker.name()
-    AGY_LOC_ID="LD"+random.choice(LOC_ID)
+    # AGY_LOC_ID="LD"+random.choice(LOC_ID)
+    AGY_LOC_ID="LD"+str(faker.random_int(min=1, max=99999))
     
 
 # AGENCY_INTERNAL_LOCATIONS TEST DATA
@@ -37,10 +37,11 @@ def get_data(fileName,scenario):
 
 # OFFENDER_BOOKINGS TEST DATA
   
-    BOOKING_NO="LH{}".format(random.randint(1000,9999))
+    # BOOKING_NO="LH{}".format(random.randint(1000,9999))
+    BOOKING_NO="LH{}"+str(faker.random_int(min=1000, max=99999))
     
 # OFFENDERS TEST DATA
-    
+    OFFENDER_ID=faker.random_int(min=1000, max=99999)
     FIRST_NAME=faker.first_name()
     LAST_NAME=faker.last_name()
     MIDDLE_NAME=faker.name().split(" ")[0]
@@ -70,9 +71,9 @@ def get_data(fileName,scenario):
     
     OFFENDERS_BOOKING_DATA['BOOKING_NO']="timestamp:{}".format(metadata_timestamp_future)
     
-    OFFENDERS = template.render(LAST_NAME=LAST_NAME,FIRST_NAME=FIRST_NAME,MIDDLE_NAME=MIDDLE_NAME,timestamp=metadata_timestamp_current)
+    OFFENDERS = template.render(OFFENDER_ID=OFFENDER_ID,LAST_NAME=LAST_NAME,FIRST_NAME=FIRST_NAME,MIDDLE_NAME=MIDDLE_NAME,timestamp=metadata_timestamp_current)
     
-    OFFENDERS_DATA[LAST_NAME]="LAST_NAME:{},FIRST_NAME:{},MIDDLE_NAME:{},timestamp:{}".format(LAST_NAME,FIRST_NAME,MIDDLE_NAME,metadata_timestamp_future)
+    OFFENDERS_DATA[OFFENDER_ID]="LAST_NAME:{},FIRST_NAME:{},MIDDLE_NAME:{},timestamp:{}".format(LAST_NAME,FIRST_NAME,MIDDLE_NAME,metadata_timestamp_future)
 
 # Convert the rendered template to a JSON payload
     payloadName=(fileName.split(".")[0])
