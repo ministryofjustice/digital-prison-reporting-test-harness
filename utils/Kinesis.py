@@ -20,11 +20,12 @@ class Kinesis:
             partition_key = str(uuid.uuid4())
 
         client = self._connected_client(profileName)
-        return client.put_record(
+        response= client.put_record(
             StreamName=self.stream,
             Data=data,
             PartitionKey=partition_key
         )
+        return "Status_Code :: {}  Shard_Id :: {} Sequence_Number :: {}".format(response['ResponseMetadata']['HTTPStatusCode'],response['ShardId'],response['SequenceNumber'])
 
     def read_stream(self, profileName, shardId, sequenceNumber):
         client = self._connected_client(profileName)

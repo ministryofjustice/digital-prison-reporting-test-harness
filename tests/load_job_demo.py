@@ -16,14 +16,13 @@ stream = Kinesis(getConfig("kinesis", "stream"))
 
 # STUB TABLE DATA
 
-tableNames = ["OFFENDERS",
-              "AGENCY_INTERNAL_LOCATIONS", "AGENCY_LOCATIONS","OFFENDER_BOOKINGS"]
+tableNames = [ "AGENCY_LOCATIONS"]
 
 
 
 def getPayloadPath():
     path=["HAPPY_PATH  ","UNHAPPY_PATH"]
-    flow_weightage=[0.8,0.2]
+    flow_weightage=[1.0,0.0]
     total_weight=sum(flow_weightage)
     i=0;
     random_num= random.uniform(0,total_weight)
@@ -41,10 +40,11 @@ def pushMessages():
     scenario=getPayloadPath()
     payload=get_data(tableName,scenario)
     
-    stream.send_stream(data=payload, profileName=profileName)
+    result=stream.send_stream(data=payload, profileName=profileName)
+    print(result)
     messages.append("{}  ::  {}".format(scenario,tableName))
     
-for i in range(1,500):
+for i in range(1,2):
     pushMessages()
 
 scenario_count={}
