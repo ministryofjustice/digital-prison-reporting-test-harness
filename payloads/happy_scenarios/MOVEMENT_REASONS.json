@@ -1,7 +1,7 @@
 {
 	"data":	{
-		"MOVEMENT_TYPE":	"REL",
-		"MOVEMENT_REASON_CODE":	"NP",
+		"MOVEMENT_TYPE":	"{{MOVEMENT_TYPE}}",
+		"MOVEMENT_REASON_CODE":	"{MOVEMENT_REASON_CODE}",
 		"DESCRIPTION":	"Non Parole Release Date",
 		"OPEN_CONTACT_FLAG":	"Y",
 		"CLOSE_CONTACT_FLAG":	"Y",
@@ -31,11 +31,11 @@
 		"UNEMPLOYMENT_PAY":	"N"
 	},
 	"metadata":	{
-		"timestamp":	"2023-06-20T15:29:23.925055Z",
+		"timestamp":	"{{timestamp}}",
 		"record-type":	"data",
 		"operation":	"load",
 		"partition-key-type":	"primary-key",
-		"partition-key-value":	"OMS_OWNER.MOVEMENT_REASONS.REL-NP",
+		"partition-key-value":	"OMS_OWNER.MOVEMENT_REASONS.{{MOVEMENT_TYPE}-{{MOVEMENT_REASON_CODE}}",
 		"schema-name":	"OMS_OWNER",
 		"table-name":	"MOVEMENT_REASONS"
 	}

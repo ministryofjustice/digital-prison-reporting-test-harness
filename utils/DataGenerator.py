@@ -47,6 +47,11 @@ def get_data(fileName,scenario):
     FIRST_NAME=faker.first_name()
     LAST_NAME=faker.last_name()
     MIDDLE_NAME=faker.name().split(" ")[0]
+    
+#  OFFENDER_EXTERNAL_MOVEMENTS   
+   
+    MOVEMENT_SEQ=faker.random_int(min=1, max=99999)
+    
 
 
 # Load the template file
