@@ -12,6 +12,8 @@ def get_data(fileName,scenario):
     OFFENDERS_DATA={}
     AGENCY_LOCATIONS_DATA={}
     AGENCY_INTERNAL_LOCATIONS_DATA={}
+    OFFENDER_EXTERNAL_MOVEMENT_DATA={}
+    MOVEMENT_REASONS_DATA={}
     
     
 # Define the variables to be used in the template
@@ -75,6 +77,15 @@ def get_data(fileName,scenario):
     
     OFFENDERS_DATA[OFFENDER_ID]="LAST_NAME:{},FIRST_NAME:{},MIDDLE_NAME:{},timestamp:{}".format(LAST_NAME,FIRST_NAME,MIDDLE_NAME,metadata_timestamp_future)
 
+    OFFENDER_EXTERNAL_MOVEMENTS= template.render()
+    
+    OFFENDER_EXTERNAL_MOVEMENT_DATA[OFFENDER_ID]=""
+    
+    MOVEMENT_REASONS=template.render()
+    
+    MOVEMENT_REASONS_DATA["MOVEMENT_TYPE"]=""
+
+
 # Convert the rendered template to a JSON payload
     payloadName=(fileName.split(".")[0])
     # print(payloadName)
@@ -87,7 +98,12 @@ def get_data(fileName,scenario):
         case"OFFENDER_BOOKINGS":
             json_payload = json.loads(OFFENDER_BOOKINGS)    
         case"OFFENDERS":
-            json_payload = json.loads(OFFENDERS)      
+            json_payload = json.loads(OFFENDERS)
+        case"OFFENDER_EXTERNAL_MOVEMENTS":
+            json_payload = json.loads(OFFENDER_EXTERNAL_MOVEMENTS) 
+        case"MOVEMENT_REASONS":
+            json_payload = json.loads(MOVEMENT_REASONS)          
+             
     
     return json.dumps(json_payload).replace("'","\"")
 
