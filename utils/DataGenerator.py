@@ -106,18 +106,18 @@ def get_data(fileName, scenario):
     OFFENDERS_DATA[OFFENDER_ID] = "LAST_NAME:{},FIRST_NAME:{},MIDDLE_NAME:{},timestamp:{}".format(
         LAST_NAME, FIRST_NAME, MIDDLE_NAME, metadata_timestamp_future)
 
-    OFFENDER_EXTERNAL_MOVEMENTS = template.render()
+    OFFENDER_EXTERNAL_MOVEMENTS = template.render(OFFENDER_ID=OFFENDER_ID,MOVEMENT_SEQ=MOVEMENT_SEQ,timestamp=metadata_timestamp_current)
 
     OEM_COMPOSITE_KEY = "{}-{}".format(OFFENDER_ID, MOVEMENT_SEQ)
 
     OFFENDER_EXTERNAL_MOVEMENT_DATA[OEM_COMPOSITE_KEY] = "timestamp:{}".format(
         metadata_timestamp_future)
 
-    MOVEMENT_REASONS = template.render()
+    MOVEMENT_REASONS = template.render(MOVEMENT_TYPE=MOVEMENT_TYPE,MOVEMENT_REASON_CODE=MOVEMENT_REASON_CODE,timestamp=metadata_timestamp_current)
 
     MR_CPOMPOSITE_KEY = "{}-{}".format(OFFENDER_ID, MOVEMENT_SEQ)
 
-    MOVEMENT_REASONS_DATA["MR_CPOMPOSITE_KEY"] = "  MOVEMENT_TYPE:{},MOVEMENT_REASON_CODE:{},timestamp:{}".format(
+    MOVEMENT_REASONS_DATA[MR_CPOMPOSITE_KEY] = "  MOVEMENT_TYPE:{},MOVEMENT_REASON_CODE:{},timestamp:{}".format(
         MOVEMENT_TYPE,MOVEMENT_REASON_CODE, metadata_timestamp_future)
 
 

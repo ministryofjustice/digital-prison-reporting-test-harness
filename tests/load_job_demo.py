@@ -17,7 +17,9 @@ stream = Kinesis(getConfig("kinesis", "stream"))
 # STUB TABLE DATA
 
 # tableNames = [ "AGENCY_LOCATIONS"]
-tableNames = [ "OFFENDERS"]
+# tableNames = [ "AGENCY_LOCATIONS"]
+tableNames = [ "MOVEMENT_REASONS"]
+# tableNames = [ "OFFENDERS"]
 
 
 
