@@ -28,7 +28,7 @@ tableNames = ["AGENCY_LOCATIONS", "AGENCY_INTERNAL_LOCATIONS", "OFFENDERS",
 
 def getPayloadPath():
     path=["HAPPY_PATH  ","UNHAPPY_PATH"]
-    flow_weightage=[1.0,0.0]
+    flow_weightage=[0.5,0.5]
     total_weight=sum(flow_weightage)
     i=0;
     random_num= random.uniform(0,total_weight)
@@ -50,7 +50,7 @@ def pushMessages():
     print("Table_Name :: {} {}".format(tableName,result))
     messages.append("{}  ::  {}".format(scenario,tableName))
     
-for i in range(1,20):
+for i in range(1,50):
     pushMessages()
 
 scenario_count={}
