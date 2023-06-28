@@ -1,0 +1,42 @@
+{
+	"data":	{
+		"MOVEMENT_TYPE":	"{{MOVEMENT_TYPE}}",
+		"MOVEMENT_REASON_CODE":	"{{MOVEMENT_REASON_CODE}}",
+		"DESCRIPTION":	"Non Parole Release Date",
+		"OPEN_CONTACT_FLAG":	"Y",
+		"CLOSE_CONTACT_FLAG":	"Y",
+		"ACTIVE_FLAG":	"Y",
+		"LIST_SEQ":	99,
+		"UPDATE_ALLOWED_FLAG":	"Y",
+		"EXPIRY_DATE":	null,
+		"CREATE_USER_ID":	"OMS_OWNER",
+		"NOTIFICATION_TYPE":	"N",
+		"NOTIFICATION_FLAG":	"N",
+		"BILLING_SERVICE_FLAG":	"N",
+		"TRANSPORTATION_FLAG":	"N",
+		"HEADER_STATUS_FLAG":	"N",
+		"IN_MOVEMENT_TYPE":	null,
+		"IN_MOVEMENT_REASON_CODE":	null,
+		"ESC_RECAP_FLAG":	"N",
+		"CREATE_DATETIME":	"2006-06-28T14:18:30Z",
+		"MODIFY_DATETIME":	"2006-07-24T12:23:10.588473000Z",
+		"MODIFY_USER_ID":	"OMS_OWNER",
+		"AUDIT_TIMESTAMP":	"2006-07-24T12:23:10.588565000Z",
+		"AUDIT_USER_ID":	"OMS_OWNER",
+		"AUDIT_MODULE_NAME":	"sqlplus@ukmbnom003 (TNS V1-V3)",
+		"AUDIT_CLIENT_USER_ID":	"oracle",
+		"AUDIT_CLIENT_IP_ADDRESS":	"10.96.137.200",
+		"AUDIT_CLIENT_WORKSTATION_NAME":	"pts/1",
+		"AUDIT_ADDITIONAL_INFO":	null,
+		"UNEMPLOYMENT_PAY":	"N"
+	},
+	"metadata":	{
+		"timestamp":	"{{timestamp}}",
+		"record-type":	"data",
+		"operation":	"load",
+		"partition-key-type":	"primary-key",
+		"partition-key-value":	"OMS_OWNER.MOVEMENT_REASONS.{{MOVEMENT_TYPE}}-{{MOVEMENT_REASON_CODE}}",
+		"schema-name":	"OMS_OWNER",
+		"table-name":	"MOVEMENT_REASONS"
+	}
+}

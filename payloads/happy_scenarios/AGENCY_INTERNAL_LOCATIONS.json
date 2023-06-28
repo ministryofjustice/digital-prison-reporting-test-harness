@@ -35,7 +35,7 @@
 		"AUDIT_ADDITIONAL_INFO": null
 	},
 	"metadata": {
-		"timestamp": "2023-03-20T17:41:23.098719Z",
+		"timestamp": "{{timestamp}}",
 		"record-type": "data",
 		"operation": "load",
 		"partition-key-type": "primary-key",
