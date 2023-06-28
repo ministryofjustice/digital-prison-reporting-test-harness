@@ -5,6 +5,7 @@ from utils.Kinesis import Kinesis
 from utils.Config import getConfig
 from utils.S3 import S3
 from utils.Athena import Athena
+from utils.DataGenerator import get_data
 
 # Arrange
 
@@ -14,7 +15,9 @@ rawBucketName= getConfig("s3","raw_zone_bucket")
 structuredBucketName= getConfig("s3","structured_zone_bucket")
 curatedBucketName= getConfig("s3","curated_zone_bucket")
 tableName="offenders"
-payload=get_payload(tableName)
+# payload=get_payload(tableName)
+payload=get_data("OFFENDERS","HAPPY_PATH")
+
 zone_repo_raw=s3handle=S3(profilename=profileName,bucketName=rawBucketName)
 zone_repo_structured=s3handle=S3(profilename=profileName,bucketName=structuredBucketName)
 zone_repo_curated=s3handle=S3(profilename=profileName,bucketName=curatedBucketName)
@@ -26,7 +29,7 @@ query = 'SELECT count(*) FROM "{}"."{}"'.format(
 
 def test_post_message_to_stream():
     response = stream.send_stream(data=payload, profileName=profileName)
-    assert response["ResponseMetadata"]["HTTPStatusCode"]  ==  200
+    assert response.find("Status_Code :: 200") != -1
     
 def test_raw_zone_source_exists():
   
