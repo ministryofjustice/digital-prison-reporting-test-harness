@@ -18,8 +18,11 @@ stream = Kinesis(getConfig("kinesis", "stream"))
 
 # tableNames = [ "AGENCY_LOCATIONS"]
 # tableNames = [ "AGENCY_LOCATIONS"]
-tableNames = [ "MOVEMENT_REASONS"]
+# tableNames = [ "MOVEMENT_REASONS"]
 # tableNames = [ "OFFENDERS"]
+
+tableNames = ["AGENCY_LOCATIONS", "AGENCY_INTERNAL_LOCATIONS", "OFFENDERS",
+              "OFFENDER_BOOKINGS", "OFFENDER_EXTERNAL_MOVEMENTS", "MOVEMENT_REASONS"]
 
 
 
@@ -47,7 +50,7 @@ def pushMessages():
     print("Table_Name :: {} {}".format(tableName,result))
     messages.append("{}  ::  {}".format(scenario,tableName))
     
-for i in range(1,2):
+for i in range(1,20):
     pushMessages()
 
 scenario_count={}
