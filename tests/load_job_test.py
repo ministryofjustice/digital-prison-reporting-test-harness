@@ -15,16 +15,16 @@ rawBucketName= getConfig("s3","raw_zone_bucket")
 structuredBucketName= getConfig("s3","structured_zone_bucket")
 curatedBucketName= getConfig("s3","curated_zone_bucket")
 tableName="offenders"
-# payload=get_payload(tableName)
+output_bucket=getConfig("s3","output_bucket")
 payload=get_data("OFFENDERS","HAPPY_PATH")
 
 zone_repo_raw=s3handle=S3(profilename=profileName,bucketName=rawBucketName)
 zone_repo_structured=s3handle=S3(profilename=profileName,bucketName=structuredBucketName)
 zone_repo_curated=s3handle=S3(profilename=profileName,bucketName=curatedBucketName)
-athena_table = Athena(profileName, 'dpr-320-test',
-                        "dpr-304-test", "athena_test")
+athena_table = Athena(profileName, 'curated',
+                        "dpr-artifact-store-development", "dpr-artifact-store-development")
 query = 'SELECT count(*) FROM "{}"."{}"'.format(
-    "dpr-320-test", "offenders")
+    "curated", "oms_owner_offenders")
 
 
 def test_post_message_to_stream():
