@@ -28,13 +28,16 @@ This project uses Python3 (Python 3.11.2 ).Key packages used are as below
 - AWS profile exists (Update config in test_data.ini)
 - Install all python packages
   ```
-    pip install -r requirements.txt 
+       python -m venv cicd
+       source cicd/bin/activate
+       pip install -r requirements.txt
   ```
 
 ### Running the tests
 
 ```
-       runner  sh runner.sh
+       runner  sh runner.sh  (or)
+       cd tests && pytest
 
 ```
 ### Integration Tests

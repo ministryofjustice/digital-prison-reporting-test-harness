@@ -1,5 +1,8 @@
 version: 2.1
 
+# https://github.com/ministryofjustice/hmpps-reporting-orb/blob/main/src/jobs/execute_test_harness.yml
+# https://github.com/ministryofjustice/hmpps-reporting-orb/blob/main/src/scripts/test_harness.sh
+
 orbs:
   reporting: ministryofjustice/hmpps-reporting@1.0.22
 
