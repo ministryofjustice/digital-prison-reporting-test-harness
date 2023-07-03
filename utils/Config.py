@@ -7,4 +7,7 @@ config.read(configFile)
 environment = os.environ.get('environment') or "development"
 
 def getConfig(section,key):
- return config[section][key].format(environment)   
+ return config[section][key].format(environment)
+
+def getBoolean(section,key):
+    return config.getboolean(section,key)
