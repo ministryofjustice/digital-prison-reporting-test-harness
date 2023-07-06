@@ -39,6 +39,11 @@ This project uses Python3 (Python 3.11.2 ).Key packages used are as below
        runner  sh runner.sh  (or)
        cd tests && pytest
 
+       Postman scripts for reporting api (digital-prison-reporting-test-harness/data_products/backend)
+       Import the collection and enviornment files and run using local postman client
+       Will need a valid DPS username & password to be updated in the enviornment file (username & password variables)
+
+
 ```
 ### Integration Tests
 
