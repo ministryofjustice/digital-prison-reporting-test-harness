@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "b68e17a3-ed74-4517-8b16-57559a7806b9",
+		"name": "Data_Products",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "reporting_API",
+			"item": [
+				{
+					"name": "GET_Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "default"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://digital-prison-reporting-mi-ui-dev.hmpps.service.justice.gov.uk/sign-in/callback",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{hmpss_auth_dev}}/auth/sign-in",
+							"host": [
+								"{{hmpss_auth_dev}}"
+							],
+							"path": [
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_Token_Callback",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('jwt_session', pm.cookies.get('jwtSession'))",
+									"",
+									"console.log(pm.environment.get('jwt_session'))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hmpss_auth_dev}}/auth/sign-in?redirect_uri=https://{{reporting_ui_dev}}/sign-in/callback",
+							"host": [
+								"{{hmpss_auth_dev}}"
+							],
+							"path": [
+								"auth",
+								"sign-in"
+							],
+							"query": [
+								{
+									"key": "redirect_uri",
+									"value": "https://{{reporting_ui_dev}}/sign-in/callback"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_establishment_count",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_session}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{reporting_ui_dev}}/establishments/count",
+							"host": [
+								"{{reporting_ui_dev}}"
+							],
+							"path": [
+								"establishments",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET__external_movments_count",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_session}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{reporting_ui_dev}}/external-movements/count",
+							"host": [
+								"{{reporting_ui_dev}}"
+							],
+							"path": [
+								"external-movements",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET__external_movments_Pagination",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_session}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{reporting_ui_dev}}/external-movements?selectedPage=1&pageSize=10&sortColumn=prisonNumber&sortedAsc=false",
+							"host": [
+								"{{reporting_ui_dev}}"
+							],
+							"path": [
+								"external-movements"
+							],
+							"query": [
+								{
+									"key": "selectedPage",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "sortColumn",
+									"value": "prisonNumber"
+								},
+								{
+									"key": "sortedAsc",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
