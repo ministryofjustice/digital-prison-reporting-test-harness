@@ -1,6 +1,6 @@
 {
 	"data": {
-		"INTERNAL_LOCATION_ID": "{{INTERNAL_LOCATION_ID}}",
+		"INTERNAL_LOCATION_ID": {{INTERNAL_LOCATION_ID}},
 		"INTERNAL_LOCATION_CODE": "VPMAINHALLSO",
 		"AGY_LOC_ID": "PNI",
 		"INTERNAL_LOCATION_TYPE": "VISIT",
@@ -39,7 +39,7 @@
 		"record-type": "data",
 		"operation": "load",
 		"partition-key-type": "primary-key",
-		"partition-key-value": "OMS_OWNER.AGENCY_INTERNAL_LOCATIONS.8994",
+		"partition-key-value": "OMS_OWNER.AGENCY_INTERNAL_LOCATIONS.{{INTERNAL_LOCATION_ID}}",
 		"schema-name": "OMS_OWNER",
 		"table-name": "AGENCY_INTERNAL_LOCATIONS"
 	}
