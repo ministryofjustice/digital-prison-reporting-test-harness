@@ -1,81 +1,79 @@
-from boto3 import Session
-from urllib.parse import urlparse
 from datetime import datetime, timedelta
+from urllib.parse import urlparse
+
+from boto3 import Session
+
 
 class S3:
 
-    def __init__(self, profilename, bucketName):
-        self.profileName = profilename
-        self.bucketName = bucketName
+    def __init__(self, profile_name, bucket_name):
+        self.profileName = profile_name
+        self.bucketName = bucket_name
 
     def client(self):
         session = Session(profile_name=self.profileName)
         return session.resource('s3')
 
-    def doesSourceExist(self, sourceName, resourceZone="raw"):
-        resourceList = []
-        bucketName = self.client().Bucket(self.bucketName)
+    def does_source_exist(self, source_name, resource_zone="raw"):
+        resource_list = []
+        bucket_name = self.client().Bucket(self.bucketName)
         # s3://dpr-raw-zone-development/nomis/
-        
-        resourcePath = "s3://{}/{}/".format(bucketName.name, sourceName)
-        
-        print(resourcePath)
-        parsed_uri = urlparse(resourcePath)
-        resourcePath = parsed_uri.path.lstrip('/')
-        objects = bucketName.objects.filter(Prefix=resourcePath)
-        objects = bucketName.objects.filter(Prefix=resourcePath)
+
+        resource_path = "s3://{}/{}/".format(bucket_name.name, source_name)
+
+        print(resource_path)
+        parsed_uri = urlparse(resource_path)
+        resource_path = parsed_uri.path.lstrip('/')
+        objects = bucket_name.objects.filter(Prefix=resource_path)
         for obj in objects:
-            resourceList.append(obj.key)
-        isFolderPresent = [resourcePath in item for item in resourceList]
-        return True if isFolderPresent else False
+            resource_list.append(obj.key)
+        is_folder_present = [resource_path in item for item in resource_list]
+        return True if is_folder_present else False
 
-    def doesTableExist(self, sourceName, tableName):
-        resourceList = []
+    def does_table_exist(self, source_name, table_name):
+        resource_list = []
 
-        bucketName = self.client().Bucket(self.bucketName)
+        bucket_name = self.client().Bucket(self.bucketName)
 
         #  s3://dpr-raw-zone-development/nomis/agency_locations/
-        resourcePath = "s3://{}/{}/{}/".format(
-            bucketName.name,sourceName,tableName)
+        resource_path = "s3://{}/{}/{}/".format(
+            bucket_name.name, source_name, table_name)
 
-        parsed_uri = urlparse(resourcePath)
-        resourcePath = parsed_uri.path.lstrip('/')
-        objects = bucketName.objects.filter(Prefix=resourcePath)
+        parsed_uri = urlparse(resource_path)
+        resource_path = parsed_uri.path.lstrip('/')
+        objects = bucket_name.objects.filter(Prefix=resource_path)
         for obj in objects:
-            resourceList.append(obj.key)
-        isFolderPresent = [resourcePath in item for item in resourceList]
+            resource_list.append(obj.key)
+        is_folder_present = [resource_path in item for item in resource_list]
 
-        return True if isFolderPresent else False
+        return True if is_folder_present else False
 
-    def getKeysFromTable(self, sourceName, tableName):
+    def get_keys_from_table(self, source_name, table_name):
 
-        keyList = []
-        bucketName = self.client().Bucket(self.bucketName)
+        bucket_name = self.client().Bucket(self.bucketName)
 
-        resourcePath = "s3://{}/{}/{}/{}/".format(
-            bucketName.name, resourceZone, sourceName, tableName)
-        print(resourcePath)
-        parsed_uri = urlparse(resourcePath)
-        resourcePath = parsed_uri.path.lstrip('/')
+        resource_path = "s3://{}/{}/{}/{}/".format(
+            bucket_name.name, resource_zone, source_name, table_name)
+        print(resource_path)
+        parsed_uri = urlparse(resource_path)
+        resource_path = parsed_uri.path.lstrip('/')
 
-        time_range = datetime.utcnow()-timedelta(days=20)
+        time_range = datetime.utcnow() - timedelta(days=20)
 
         print("Time Range", time_range)
 
-        # keyList=[obj.key for obj in bucketName.objects.filter(Prefix=resourcePath) if obj.last_modified.replace(tzinfo= None) >= time_range and obj.key.endswith('parquet')]
+        key_list = ["s3://{}/".format(self.bucketName) + obj.key for obj in bucket_name.objects.filter(
+            Prefix=resource_path) if
+                   obj.last_modified.replace(tzinfo=None) >= time_range and obj.key.endswith('parquet')]
 
-        keyList = ["s3://{}/".format(self.bucketName)+obj.key for obj in bucketName.objects.filter(
-            Prefix=resourcePath) if obj.last_modified.replace(tzinfo=None) >= time_range and obj.key.endswith('parquet')]
+        return key_list
 
-        return keyList
-
-    def getKeysFromS3RawBucket(self, sourceName, tableName):
+    def get_keys_from_s3_raw_bucket(self, source_name, table_name):
         bucket = self.client().Bucket(self.bucketName)
-        folderPath = "raw/{}/".format(sourceName)
-        tablePath = "raw/{}/{}/load/".format(sourceName, tableName)
+        folder_path = "raw/{}/".format(source_name)
 
         for obj in bucket.objects.all():
-            if (obj.key.endswith(folderPath)):
+            if obj.key.endswith(folder_path):
                 print('Folder', obj.key)
             else:
                 print('File', obj.key)

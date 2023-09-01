@@ -1,39 +1,43 @@
-import uuid,json
 import base64
-import json,os
+import json
+
 from boto3 import Session
+
+
 class Kinesis:
 
     def __init__(self, stream):
         self.stream = stream
 
-    def _connected_client(self, profileName):
-        session = Session(profile_name=profileName)
+    @staticmethod
+    def _connected_client(profile_name):
+        session = Session(profile_name=profile_name)
         return session.client('kinesis')
 
     def stream_name(self):
         return self.stream
 
-    def send_stream(self, data, profileName, partition_key=None):
+    def send_stream(self, data, profile_name, partition_key=None):
 
-        if partition_key == None:
+        if partition_key is None:
             # partition_key = str(uuid.uuid4())
-              partition_key=json.loads(data)['metadata']['partition-key-value'] 
-        client = self._connected_client(profileName)
-        response= client.put_record(
+            partition_key = json.loads(data)['metadata']['partition-key-value']
+        client = self._connected_client(profile_name)
+        response = client.put_record(
             StreamName=self.stream,
             Data=data,
             PartitionKey=partition_key
         )
-        return "Status_Code :: {}  Shard_Id :: {} Sequence_Number :: {}".format(response['ResponseMetadata']['HTTPStatusCode'],response['ShardId'],response['SequenceNumber'])
+        return "Status_Code :: {}  Shard_Id :: {} Sequence_Number :: {}".format(
+            response['ResponseMetadata']['HTTPStatusCode'], response['ShardId'], response['SequenceNumber'])
 
-    def read_stream(self, profileName, shardId, sequenceNumber):
-        client = self._connected_client(profileName)
+    def read_stream(self, profile_name, shard_id, sequence_number):
+        client = self._connected_client(profile_name)
         shard_iterator = client.get_shard_iterator(
             StreamName=self.stream,
-            ShardId=shardId,
+            ShardId=shard_id,
             ShardIteratorType='AT_SEQUENCE_NUMBER',
-            StartingSequenceNumber=sequenceNumber
+            StartingSequenceNumber=sequence_number
         )['ShardIterator']
 
         while True:
@@ -43,8 +47,8 @@ class Kinesis:
             records = records_response['Records']
 
             for record in records:
-                streamData = base64.b64decode(record['Data']).decode('UTF-8')
-                if 'offender_bookings' in streamData:
-                    return streamData
+                stream_data = base64.b64decode(record['Data']).decode('UTF-8')
+                if 'offender_bookings' in stream_data:
+                    return stream_data
 
             shard_iterator = records_response['NextShardIterator']
