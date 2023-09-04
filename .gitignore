@@ -24,3 +24,4 @@ env/
 terraform.tfstate
 hari-test
 cicd/
+.idea/

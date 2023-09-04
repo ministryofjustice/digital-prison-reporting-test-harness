@@ -3,17 +3,17 @@ from boto3 import Session
 
 class Athena:
 
-    def __init__(self, profileName, database, outputBucket, outputFolder):
-        self.profileName = profileName
+    def __init__(self, profile_name, database, output_bucket, output_folder):
+        self.profileName = profile_name
         self.database = database
-        self.bucket = outputBucket
-        self.folder = outputFolder
+        self.bucket = output_bucket
+        self.folder = output_folder
 
     def client(self):
         session = Session(profile_name=self.profileName)
         return session.client('athena')
 
-    def runQuery(self, query):
+    def run_query(self, query):
         # print("QUERY IS", query)
         response = self.client().start_query_execution(
             QueryString=query,
