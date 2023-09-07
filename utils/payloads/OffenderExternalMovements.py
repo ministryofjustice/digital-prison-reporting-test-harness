@@ -13,7 +13,6 @@ class OffenderExternalMovements:
         self.__timestamp_format = timestamp_format
         self.__create_table_template = self.__jinja_env.get_template('create-table.json')
         self.__load_table_template = self.__jinja_env.get_template('load.json')
-        # TODO: Double check inserts, updates and deletes all have the same structure
         self.__cdc_template = self.__jinja_env.get_template('cdc.json')
 
     def create_table_payload(self, timestamp: datetime) -> str:
