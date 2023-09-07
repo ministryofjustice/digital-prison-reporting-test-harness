@@ -20,9 +20,9 @@ class OffenderExternalMovements:
 
     def load_payload(self, timestamp: datetime, offender_id: int, movement_seq: int) -> str:
         return self.__load_table_template.render(timestamp=timestamp.strftime(self.__timestamp_format),
-                                                 OFFENDER_ID=offender_id,
-                                                 MOVEMENT_SEQ=movement_seq)
+                                                 offender_id=offender_id,
+                                                 movement_seq=movement_seq)
 
     def update_payload(self, timestamp: datetime, offender_id: int, movement_seq: int, transaction_id: int) -> str:
-        return self.__cdc_template.render(timestamp=timestamp, OFFENDER_ID=offender_id, MOVEMENT_SEQ=movement_seq,
+        return self.__cdc_template.render(timestamp=timestamp, offender_id=offender_id, movement_seq=movement_seq,
                                           transaction_id=transaction_id)

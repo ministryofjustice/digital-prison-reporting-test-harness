@@ -1,7 +1,7 @@
 {
   "data": {
-    "OFFENDER_BOOK_ID": {{OFFENDER_ID}},
-    "MOVEMENT_SEQ": {{MOVEMENT_SEQ}},
+    "OFFENDER_BOOK_ID": {{offender_id}},
+    "MOVEMENT_SEQ": {{movement_seq}},
     "MOVEMENT_DATE": "2012-12-17T00:00:00Z",
     "MOVEMENT_TIME": "2012-12-17T10:27:00Z",
     "INTERNAL_SCHEDULE_TYPE": "TAP",

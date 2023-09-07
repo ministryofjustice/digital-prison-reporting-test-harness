@@ -58,3 +58,5 @@ if __name__ == '__main__':
         logging.info("Sent CDC message for table :: offender_external_movements {}".format(send_result))
         cdc_time + timedelta(minutes=3)
         transaction_id = transaction_id + 1
+
+    logging.info('Finished writing data for DPR-677 (UDF problems on null JSON fields)')
