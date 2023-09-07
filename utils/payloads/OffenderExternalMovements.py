@@ -5,6 +5,7 @@ from jinja2 import Environment, FileSystemLoader
 
 
 class OffenderExternalMovements:
+    """Produces JSON payloads for offender_external_movements"""
 
     def __init__(self, template_dir, timestamp_format: str = '%Y-%m-%dT%H:%M:%S.%fZ') -> None:
         table_name = 'offender_external_movements'
@@ -25,4 +26,4 @@ class OffenderExternalMovements:
 
     def update_payload(self, timestamp: datetime, offender_id: int, movement_seq: int, transaction_id: int) -> str:
         return self.__cdc_template.render(timestamp=timestamp, offender_id=offender_id, movement_seq=movement_seq,
-                                          transaction_id=transaction_id)
+                                          transaction_id=transaction_id, operation='update')

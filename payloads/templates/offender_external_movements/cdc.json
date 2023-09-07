@@ -44,7 +44,7 @@
   "metadata": {
     "timestamp": "{{timestamp}}",
     "record-type": "data",
-    "operation": "update",
+    "operation": "{{operation}}",
     "partition-key-type": "schema-table",
     "schema-name": "OMS_OWNER",
     "table-name": "OFFENDER_EXTERNAL_MOVEMENTS",
