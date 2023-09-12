@@ -17,7 +17,7 @@ workflows:
               only: /.*/
             tags:
               ignore: /.*/
-          notify_slack: true    
+          notify_slack: false    
           context:
             - hmpps-reporting-common
             - hmpps-reporting-orb
